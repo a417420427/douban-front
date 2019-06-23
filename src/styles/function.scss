@@ -1,0 +1,23 @@
+// 根据页面和优先级生成z-index
+@function createIndex($index, $stage) {
+    @return $index + $stage*10 
+};
+
+// 页面主色调
+$movie: #2384e8;
+$TV: #7a6adb;
+$book: #9f7860;
+$location: #e6467e;
+$group: #2ab8cc;
+$music: #f48f2e;
+$read: #9f7860;
+$game: #5774c5;
+$app: #596cdd;
+$broadcast: #e1644d;
+$FM: #40cfa9;
+$doupin: #42bd56;
+
+$mainColor: #42bd56;
+
+$dark: #494949;
+$light: #aaa; 

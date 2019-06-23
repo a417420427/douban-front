@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './lib.scss';
+@import './function.scss';
+
+body, html {
+    width: 375px;
+    height: 667px;
+}
+.icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
