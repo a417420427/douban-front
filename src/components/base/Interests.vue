@@ -4,7 +4,7 @@
     <ul class="interest-list">
       <li class="interest-item" v-for="interest in interests" :key="interest.id">
         <div class="user-info dp-f">
-          <div class="user-icon" :style="`background: url(${interest.user.avatar})`"></div>
+          <div class="user-icon" :style="getBackground(interest.user.avatar)"></div>
           <div class="user-detail">
             <p class="dp-f">
               <strong>{{interest.user.name}}</strong>
@@ -32,6 +32,7 @@
 </template>
 <script>
 import { getDistanceFromTime } from "../../utils/time";
+import { getBackground } from "../../utils/files";
 
 export default {
   name: "interests",
@@ -54,7 +55,7 @@ export default {
       return `${this.interestsTitle}的短评(${this.interestsTotal})`;
     }
   },
-  methods: { getDistanceFromTime }
+  methods: { getDistanceFromTime, getBackground }
 };
 </script>
 
