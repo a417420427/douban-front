@@ -8,7 +8,8 @@
           <div class="user-detail">
             <p class="dp-f">
               <strong>{{interest.user.name}}</strong>
-              <rate :rate="interest.rating.star_count*20" :totalWidth="70"/>
+              <rate v-if="interest.rating" :rate="interest.rating.star_count*20" :totalWidth="70"/>
+              <span v-else>无评分</span>
             </p>
             <p class="time">{{getDistanceFromTime(interest.create_time)}}</p>
           </div>

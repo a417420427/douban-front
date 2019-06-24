@@ -1,8 +1,14 @@
 <template>
   <div class="page-tv">
-    <CommonSection name="tv" from="hot" :commonList="firstRow" title="近期值得看的国产" link="/a/b"/>
-    <CommonSection name="tv" from="latest" title="近期值得看的综艺" link="/a/b" :commonList="secondRow"/>
-    <CommonSection name="tv" from="free" :commonList="thirdRow" title="近期值得看的美剧" link="/a/b"/>
+    <CommonSection name="tvDetail" from="hot" :commonList="firstRow" title="近期值得看的国产" link="/a/b"/>
+    <CommonSection
+      name="tvDetail"
+      from="latest"
+      title="近期值得看的综艺"
+      link="/a/b"
+      :commonList="secondRow"
+    />
+    <CommonSection name="tvDetail" from="free" :commonList="thirdRow" title="近期值得看的美剧" link="/a/b"/>
     <type-list :types="types"/>
     <page-footer/>
   </div>

@@ -42,6 +42,7 @@ export default {
       return `background-image: url(${src})`; //getBackground(src);
     },
     itemClick(id) {
+      console.log(id, this.name);
       this.$router.push({
         name: this.name,
         params: {

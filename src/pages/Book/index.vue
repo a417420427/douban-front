@@ -1,14 +1,8 @@
 <template>
   <div class="page-book">
-    <CommonSection name="book" from="hot" :commonList="firstRow" title="最受关注图书|虚构类" link="/a/b"/>
-    <CommonSection
-      name="book"
-      from="latest"
-      title="最受关注图书|非虚构类"
-      link="/a/b"
-      :commonList="secondRow"
-    />
-    <CommonSection name="book" from="free" :commonList="thirdRow" title="豆瓣图书" link="/a/b"/>
+    <CommonSection :name="'bookDetail'" :commonList="firstRow" title="最受关注图书|虚构类" link="/a/b"/>
+    <CommonSection :name="'bookDetail'" title="最受关注图书|非虚构类" link="/a/b" :commonList="secondRow"/>
+    <CommonSection :name="'bookDetail'" :commonList="thirdRow" title="豆瓣图书" link="/a/b"/>
     <type-list :types="types"/>
     <page-footer/>
   </div>

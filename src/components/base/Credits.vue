@@ -3,7 +3,7 @@
     <h3 class="title">影人</h3>
     <ul class="credits-list dp-f">
       <li v-for="credit in creditsList" :key="credit.id">
-        <img :src="credit.cover_url" class="cover">
+        <img ref="img" :src="getTransferedImage(credit.cover_url)" class="cover">
         <p class="name">{{credit.name}}</p>
         <span class="role">{{credit.roles[0]}}</span>
       </li>
@@ -11,6 +11,8 @@
   </div>
 </template>
 <script>
+import { getTransferedImage } from "../../utils/files";
+
 export default {
   name: "credits",
   props: {
@@ -18,6 +20,9 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    getTransferedImage
   }
 };
 </script>

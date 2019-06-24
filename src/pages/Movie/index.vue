@@ -1,8 +1,14 @@
 <template>
   <div class="page-movie">
-    <CommonSection name="movie" from="hot" :commonList="firstRow" title="影院热映" link="/a/b"/>
-    <CommonSection name="movie" from="latest" title="免费在线观影" link="/a/b" :commonList="secondRow"/>
-    <CommonSection name="movie" from="free" :commonList="thirdRow" title="新片速递" link="/a/b"/>
+    <CommonSection name="movieDetail" from="hot" :commonList="firstRow" title="影院热映" link="/a/b"/>
+    <CommonSection
+      name="movieDetail"
+      from="latest"
+      title="免费在线观影"
+      link="/a/b"
+      :commonList="secondRow"
+    />
+    <CommonSection name="movieDetail" from="free" :commonList="thirdRow" title="新片速递" link="/a/b"/>
     <type-list :types="types"/>
     <page-footer/>
   </div>

@@ -16,7 +16,7 @@ export default {
   name: "discuss",
   props: {
     discuss: {
-      type: Object,
+      type: Array,
       required: true
     },
     discussTotal: {
