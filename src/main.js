@@ -9,9 +9,9 @@ import './styles/index.scss'
 import './assets/fonts/iconfont'
 import './styles/rem'
 Vue.config.productionTip = false
-console.log(BaseUrl)
+
 const instance = axios.create({
-  baseURL: `http://${BaseUrl}:3000`
+  baseURL: baseURL
 })
 
 Vue.prototype.$ajax = instance
