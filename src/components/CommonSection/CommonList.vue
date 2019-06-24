@@ -1,12 +1,17 @@
 <template>
-  <div class="movie-list-wrap">
+  <div class="common-list-wrap">
     <ul
-      class="movie-list clearfix"
+      class="common-list clearfix"
       :style="{
-          width: movieList.length * 120 + 'px'
+          width: commonList.length * 120 + 'px'
       }"
     >
-      <li @click="enterMovie(item.id)" class="fl-l" v-for="item in movieList" :key="item.id">
+      <li
+        @click="itemClick(item.id)"
+        class="fl-l"
+        v-for="item in commonList"
+        :key="item.id || item.title"
+      >
         <div class="item-pic" :style="background(item.cover.url)"></div>
         <h4 class="item-title css-ellipsis">{{item.title}}</h4>
         <div class="item-rate dp-f" v-if="item.rating">
@@ -23,34 +28,37 @@ import { getBackground } from "../../utils/files";
 
 export default {
   props: {
-    movieList: {
+    commonList: {
       type: Array,
-      default: []
+      default: () => []
+    },
+    name: {
+      type: String,
+      required: true
     }
   },
   methods: {
     background(src) {
-      return getBackground(src);
+      return `background-image: url(${src})`; //getBackground(src);
     },
-    enterMovie(id) {
+    itemClick(id) {
       this.$router.push({
-        name: "movieDetail",
+        name: this.name,
         params: {
           id
         }
       });
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style lang="scss" scoped>
-.movie-list-wrap {
+.common-list-wrap {
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
-.movie-list {
+.common-list {
   margin-top: 18px;
   height: 188px;
   li {

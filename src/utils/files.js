@@ -1,5 +1,5 @@
 export const getTransferedImage = src => {
-    const prefix = `${BaseUrl}/assets/images`;
+    const prefix = `${baseURL}/assets/images`;
     return `${prefix}?source=${src}`;
 }
 

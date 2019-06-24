@@ -10,7 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const getIPAdress = require('./tools/address').getIPAdress()
-const BASE_URL = getIPAdress //'47.94.104.134'
+const BASE_URL = `http://${getIPAdress}:3000` //'47.94.104.134'
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -49,7 +49,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env'),
-      'BaseUrl': JSON.stringify(BASE_URL),
+      'baseURL': JSON.stringify(BASE_URL),
 
     }),
     new webpack.HotModuleReplacementPlugin(),

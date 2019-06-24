@@ -9,10 +9,10 @@ import './styles/index.scss'
 import './assets/fonts/iconfont'
 import './styles/rem'
 Vue.config.productionTip = false
-
 const instance = axios.create({
   baseURL: baseURL
 })
+
 
 Vue.prototype.$ajax = instance
 
