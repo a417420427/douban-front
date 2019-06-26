@@ -2,14 +2,17 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home/index.vue'
 import Movie from '../pages/Movie/index.vue'
+import MovieMore from '../pages/MovieMore/index.vue'
+import MovieDetail from '../pages/MovieDetail/index.vue'
 import Book from '../pages/Book/index.vue'
+import BookMore from '../pages/BookMore/index.vue'
 import BookDetail from '../pages/BookDetail/index.vue'
 import Tv from '../pages/Tv/index.vue'
-import TvDetail from '../pages/TvDetail/index.vue'
-import MovieDetail from '../pages/MovieDetail/index.vue'
 import TvMore from '../pages/TvMore/index.vue'
-import MovieMore from '../pages/MovieMore/index.vue'
-import BookMore from '../pages/BookMore/index.vue'
+import TvDetail from '../pages/TvDetail/index.vue'
+import Music from '../pages/Music/index.vue'
+import MusicMore from '../pages/MusicMore/index.vue'
+import MusicDetail from '../pages/MusicDetail/index.vue'
 import { pageNames } from '../utils/pageHelper';
 
 Vue.use(Router)
@@ -64,6 +67,21 @@ export default new Router({
       path: '/tv/more/:sort',
       component: TvMore,
       name: pageNames.tv.MORE
+    },
+    {
+      path: '/music',
+      component: Music,
+      name: pageNames.music.MAIN
+    },
+    {
+      path: '/music/:id',
+      component: MusicDetail,
+      name: pageNames.music.DETAIL
+    },
+    {
+      path: '/music/more/:sort',
+      component: MusicMore,
+      name: pageNames.music.MORE
     }
   ]
 })

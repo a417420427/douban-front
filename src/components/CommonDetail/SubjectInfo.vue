@@ -10,12 +10,14 @@
     </div>
     <div class="cover" v-if="subjectInfo.cover">
       <a href>
-        <img :src="subjectInfo.cover" alt>
+        <img :src="getTransferedImage(subjectInfo.cover)" alt>
       </a>
     </div>
   </div>
 </template>
 <script>
+import { getTransferedImage } from "../../utils/files";
+
 export default {
   name: "subject-info",
   props: {
@@ -23,6 +25,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    getTransferedImage
   }
 };
 </script>

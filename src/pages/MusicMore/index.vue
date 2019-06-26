@@ -1,14 +1,17 @@
+
+
 <template>
-  <CommonDetail name="tv"/>
+  <PageMore name="book"/>
 </template>
+
 <script>
-import CommonDetail from "../../components/CommonDetail";
 import { pageNames } from "../../utils/pageHelper";
+import PageMore from "../../components/PageMore";
+
 export default {
-  name: pageNames.tv.DETAIL,
+  name: pageNames.book.MORE,
   components: {
-    CommonDetail
+    PageMore
   }
 };
 </script>
-

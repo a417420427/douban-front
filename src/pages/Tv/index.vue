@@ -40,10 +40,7 @@ export default {
     CommonSection
   },
   mounted() {
-    this.getFirstRow();
-    this.getThirdRow();
-    this.getSecondRow();
-    this.getTypes();
+    this.initPage();
   },
   methods: {
     async getRow({ url }) {
@@ -70,6 +67,16 @@ export default {
         });
       }
       this.types = result.data;
+    },
+    async initPage() {
+      this.$loading.show();
+      await Promise.all([
+        this.getFirstRow(),
+        this.getThirdRow(),
+        this.getSecondRow(),
+        this.getTypes()
+      ]);
+      this.$loading.hide();
     }
   }
 };

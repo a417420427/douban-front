@@ -1,25 +1,22 @@
 <template>
-  <div class="page-movie">
+  <div class="page-music">
     <CommonSection
-      name="movieDetail"
-      from="hot"
+      :name="'musicDetail'"
       :commonList="firstRow"
-      title="影院热映"
-      :link="{name: 'movie', sort: 'showing'}"
+      title="国内音乐"
+      :link="{name: 'music', sort: 'real'}"
     />
     <CommonSection
-      name="movieDetail"
-      from="latest"
-      title="免费在线观影"
-      :link="{name: 'movie', sort: 'free'}"
+      :name="'musicDetail'"
+      title="欧米音乐"
+      :link="{name: 'music', sort: 'list'}"
       :commonList="secondRow"
     />
     <CommonSection
-      name="movieDetail"
-      from="free"
+      :name="'musicDetail'"
       :commonList="thirdRow"
-      title="新片速递"
-      :link="{name: 'movie', sort: 'latest'}"
+      title="日韩音乐"
+      :link="{name: 'music', sort: 'latest'}"
     />
     <type-list :types="types"/>
     <page-footer/>
@@ -27,11 +24,10 @@
 </template>
 <script>
 import CommonSection from "../../components/CommonSection";
-import { pageNames } from "../../utils/pageHelper";
-// 当前页面所需请求
-const LINKS = ["showing", "free", "latest"];
+import { pageNames, pageLinks } from "../../utils/pageHelper";
+
 export default {
-  name: pageNames.movie.MAIN,
+  name: pageNames.music.MAIN,
   data() {
     return {
       firstRow: [],
@@ -52,17 +48,17 @@ export default {
       return result.data.subject_collection_items;
     },
     async getFirstRow() {
-      this.firstRow = await this.getRow({ url: "/api/movie/showing" });
+      this.firstRow = await this.getRow({ url: pageLinks.music.firstRow });
     },
     async getSecondRow() {
-      this.secondRow = await this.getRow({ url: "/api/movie/free" });
+      this.secondRow = await this.getRow({ url: pageLinks.music.secondRow });
     },
     async getThirdRow() {
-      this.thirdRow = await this.getRow({ url: "/api/movie/latest" });
+      this.thirdRow = await this.getRow({ url: pageLinks.music.thirdRow });
     },
     async getTypes() {
       const result = await this.$ajax({
-        url: "/api/movie/types"
+        url: "/api/music/types"
       });
       if (result.data.length % 2 !== 0) {
         result.data.push({
@@ -79,14 +75,16 @@ export default {
         this.getThirdRow(),
         this.getSecondRow(),
         this.getTypes()
-      ]);
+      ]).catch(err => {
+        console.log(err);
+      });
       this.$loading.hide();
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.page-movie {
+.page-music {
   margin-top: 20px;
   box-sizing: border-box;
   padding: 0 18px;
