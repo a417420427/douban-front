@@ -1,16 +1,33 @@
 <template>
   <div class="page-book">
-    <CommonSection :name="'bookDetail'" :commonList="firstRow" title="最受关注图书|虚构类" link="/a/b"/>
-    <CommonSection :name="'bookDetail'" title="最受关注图书|非虚构类" link="/a/b" :commonList="secondRow"/>
-    <CommonSection :name="'bookDetail'" :commonList="thirdRow" title="豆瓣图书" link="/a/b"/>
+    <CommonSection
+      :name="'bookDetail'"
+      :commonList="firstRow"
+      title="最受关注图书|虚构类"
+      :link="{name: 'book', sort: 'real'}"
+    />
+    <CommonSection
+      :name="'bookDetail'"
+      title="最受关注图书|非虚构类"
+      :link="{name: 'book', sort: 'list'}"
+      :commonList="secondRow"
+    />
+    <CommonSection
+      :name="'bookDetail'"
+      :commonList="thirdRow"
+      title="豆瓣图书"
+      :link="{name: 'book', sort: 'latest'}"
+    />
     <type-list :types="types"/>
     <page-footer/>
   </div>
 </template>
 <script>
 import CommonSection from "../../components/CommonSection";
+import { pageNames, pageLinks } from "../../utils/pageHelper";
+
 export default {
-  name: "book",
+  name: pageNames.book.MAIN,
   data() {
     return {
       firstRow: [],
@@ -34,13 +51,13 @@ export default {
       return result.data.subject_collection_items;
     },
     async getFirstRow() {
-      this.firstRow = await this.getRow({ url: "/api/book/real" });
+      this.firstRow = await this.getRow({ url: pageLinks.book.real });
     },
     async getSecondRow() {
-      this.secondRow = await this.getRow({ url: "/api/book/list" });
+      this.secondRow = await this.getRow({ url: pageLinks.book.list });
     },
     async getThirdRow() {
-      this.thirdRow = await this.getRow({ url: "/api/book/unreal" });
+      this.thirdRow = await this.getRow({ url: pageLinks.book.unreal });
     },
     async getTypes() {
       const result = await this.$ajax({

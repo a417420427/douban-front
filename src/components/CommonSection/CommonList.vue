@@ -12,7 +12,7 @@
         v-for="item in commonList"
         :key="item.id || item.title"
       >
-        <div class="item-pic" :style="background(item.cover.url)"></div>
+        <div class="item-pic" :style="getBackground(item.cover.url)"></div>
         <h4 class="item-title css-ellipsis">{{item.title}}</h4>
         <div class="item-rate dp-f" v-if="item.rating">
           <rate class="item-rate-visual" :rate="item.rating.value*10" :totalWidth="50"/>
@@ -38,9 +38,7 @@ export default {
     }
   },
   methods: {
-    background(src) {
-      return `background-image: url(${src})`; //getBackground(src);
-    },
+    getBackground,
     itemClick(id) {
       console.log(id, this.name);
       this.$router.push({

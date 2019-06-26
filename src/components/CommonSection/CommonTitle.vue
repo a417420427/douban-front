@@ -1,10 +1,12 @@
 <template>
   <div class="movie-title dp-f">
     <span class="title">{{title}}</span>
-    <a class="more" :href="link">更多</a>
+    <a href="javascript:;" class="more" @click="loadMore">更多</a>
   </div>
 </template>
 <script>
+import { pageNames } from "../../utils/pageHelper";
+
 export default {
   props: {
     title: {
@@ -12,8 +14,19 @@ export default {
       required: true
     },
     link: {
-      type: String,
+      type: [String, Object],
       required: true
+    }
+  },
+  methods: {
+    loadMore() {
+      console.log(this.link, "xxxx");
+      this.$router.push({
+        name: pageNames[this.link.name].MORE,
+        params: {
+          sort: this.link.sort
+        }
+      });
     }
   }
 };

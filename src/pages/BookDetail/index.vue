@@ -19,9 +19,10 @@
 <script>
 import { getBackground } from "../../utils/files";
 import { getDistanceFromTime } from "../../utils/time";
+import { pageNames } from "../../utils/pageHelper";
 
 export default {
-  name: "bookDetail",
+  name: pageNames.book.MAIN,
   data() {
     return {
       bookDetail: {

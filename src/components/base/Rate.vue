@@ -5,7 +5,7 @@
         <svg
           :style="{
           width: `${starWidth}px`
-      }"
+          }"
           class="icon"
           viewBox="0 0 1024 1024"
           xmlns:xlink="http://www.w3.org/1999/xlink"

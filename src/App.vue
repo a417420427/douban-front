@@ -13,7 +13,8 @@ export default {
   name: "App",
   data() {
     return {
-      searchVisiable: false
+      searchVisiable: false,
+      loading: false
     };
   },
   components: {
@@ -22,13 +23,12 @@ export default {
   },
   methods: {
     troggleSearch(value) {
-      console.log(value, "xxxx");
       this.searchVisiable = value;
     }
   },
   mounted() {
-    //document.querySelector(".page-header").classList.add("op-0");
-    //document.querySelector(".page-home-banner").classList.add("op-0");
+    // document.querySelector(".page-header").classList.add("op-0");
+    // document.querySelector(".page-home-banner").classList.add("op-0");
   }
 };
 </script>

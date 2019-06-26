@@ -1,22 +1,37 @@
 <template>
   <div class="page-movie">
-    <CommonSection name="movieDetail" from="hot" :commonList="firstRow" title="影院热映" link="/a/b"/>
+    <CommonSection
+      name="movieDetail"
+      from="hot"
+      :commonList="firstRow"
+      title="影院热映"
+      :link="{name: 'movie', sort: 'showing'}"
+    />
     <CommonSection
       name="movieDetail"
       from="latest"
       title="免费在线观影"
-      link="/a/b"
+      :link="{name: 'movie', sort: 'free'}"
       :commonList="secondRow"
     />
-    <CommonSection name="movieDetail" from="free" :commonList="thirdRow" title="新片速递" link="/a/b"/>
+    <CommonSection
+      name="movieDetail"
+      from="free"
+      :commonList="thirdRow"
+      title="新片速递"
+      :link="{name: 'movie', sort: 'latest'}"
+    />
     <type-list :types="types"/>
     <page-footer/>
   </div>
 </template>
 <script>
 import CommonSection from "../../components/CommonSection";
+import { pageNames } from "../../utils/pageHelper";
+// 当前页面所需请求
+const LINKS = ["showing", "free", "latest"];
 export default {
-  name: "movie",
+  name: pageNames.movie.MAIN,
   data() {
     return {
       firstRow: [],
@@ -29,9 +44,14 @@ export default {
     CommonSection
   },
   mounted() {
-    this.getFirstRow();
-    this.getThirdRow();
-    this.getSecondRow();
+    this.$loading.show();
+    Promise.all([
+      this.getFirstRow(),
+      this.getThirdRow(),
+      this.getSecondRow()
+    ]).then(() => {
+      this.$loading.hide();
+    });
     this.getTypes();
   },
   methods: {

@@ -19,9 +19,10 @@
 <script>
 import { getBackground } from "../../utils/files";
 import { getDistanceFromTime } from "../../utils/time";
+import { pageNames } from "../../utils/pageHelper";
 
 export default {
-  name: "movieDetail",
+  name: pageNames.movie.DETAIL,
   data() {
     return {
       movieDetail: {

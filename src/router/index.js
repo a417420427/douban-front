@@ -7,45 +7,63 @@ import BookDetail from '../pages/BookDetail/index.vue'
 import Tv from '../pages/Tv/index.vue'
 import TvDetail from '../pages/TvDetail/index.vue'
 import MovieDetail from '../pages/MovieDetail/index.vue'
+import TvMore from '../pages/TvMore/index.vue'
+import MovieMore from '../pages/MovieMore/index.vue'
+import BookMore from '../pages/BookMore/index.vue'
+import { pageNames } from '../utils/pageHelper';
 
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
       path: '/',
       component: Home,
-      name: 'home'
+      name: pageNames.home.MAIN
     },
     {
       path: '/movie',
       component: Movie,
-      name: 'movie'
+      name: pageNames.movie.MAIN
     },
     {
       path: '/movie/:id',
       component: MovieDetail,
-      name: MovieDetail.name
+      name: pageNames.movie.DETAIL
+    },
+    {
+      path: '/movie/more/:sort',
+      component: MovieMore,
+      name: pageNames.movie.MORE
     },
     {
       path: '/book',
       component: Book,
-      name: 'book'
+      name: pageNames.book.MAIN
     },
     {
       path: '/book/:id',
       component: BookDetail,
-      name: BookDetail.name
+      name: pageNames.book.DETAIL
+    },
+    {
+      path: '/book/more/:sort',
+      component: BookMore,
+      name: pageNames.book.MORE
     },
     {
       path: '/tv',
       component: Tv,
-      name: 'tv'
+      name: pageNames.tv.MAIN
     },
     {
       path: '/tv/:id',
       component: TvDetail,
-      name: TvDetail.name
+      name: pageNames.tv.DETAIL
     },
+    {
+      path: '/tv/more/:sort',
+      component: TvMore,
+      name: pageNames.tv.MORE
+    }
   ]
 })
