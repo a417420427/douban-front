@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li @click="itemEnter">
     <div class="multiple-pic" v-if="isMultiple">
       <div class="collect-area dp-f">
         <div class="pic-main">
@@ -21,6 +21,7 @@
 </template>
 <script>
 import { getBackground } from ".././../utils/files";
+import { pageNames } from "../../utils/pageHelper";
 export default {
   name: "BaseItem",
   props: {
@@ -47,8 +48,11 @@ export default {
     }
   },
   methods: {
-    background(source) {
-      return `background-image: url(${source})`;
+    itemEnter() {
+      this.$router.push({
+        name: pageNames.home.DETAIL,
+        params: { id: this.content.id }
+      });
     }
   }
 };

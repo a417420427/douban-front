@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const getIPAdress = require('./tools/address').getIPAdress()
+const IPAdress = require('./tools/address').getIPAdress()
 const BASE_URL = `http://${'47.94.104.134'}:3000` //'47.94.104.134'
 
 const HOST = process.env.HOST

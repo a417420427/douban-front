@@ -32,7 +32,8 @@ export const pageLinks = {
 
 export const pageNames = {
     home: {
-        MAIN: 'home'
+        MAIN: 'home',
+        DETAIL: 'detail'
     },
     tv: {
         MAIN: 'tv',

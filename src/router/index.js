@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home/index.vue'
+import HomeDetail from '../pages/HomeDetail/index.vue'
 import Movie from '../pages/Movie/index.vue'
 import MovieMore from '../pages/MovieMore/index.vue'
 import MovieDetail from '../pages/MovieDetail/index.vue'
@@ -22,6 +23,11 @@ export default new Router({
       path: '/',
       component: Home,
       name: pageNames.home.MAIN
+    },
+    {
+      path: '/note/:id',
+      component: HomeDetail,
+      name: pageNames.home.DETAIL
     },
     {
       path: '/movie',
