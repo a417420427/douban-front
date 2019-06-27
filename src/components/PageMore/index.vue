@@ -1,6 +1,6 @@
 <template>
   <div class="page-more" @scroll="pageScroll">
-    <h1 class="title">标题</h1>
+    <h1 class="title">{{title}}</h1>
     <ul>
       <li v-for="item in sortList" :key="item.id" class="dp-f">
         <div class="more-left">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { pageNames, pageLinks } from "../../utils/pageHelper";
+import { pageNames, pageLinks, selectionData } from "../../utils/pageHelper";
 import { getTransferedImage, scrollHandler } from "../../utils/files";
 const SORT_COUNT = 20;
 export default {
@@ -38,11 +38,25 @@ export default {
     console.log(this);
   },
   computed: {
-    sort() {
-      return this.$route.params.sort;
+    row() {
+      const page = selectionData[this.name];
+      const currentRow = Object.keys(page).find(
+        row => page[row].sort === this.$route.params.sort
+      );
+      return currentRow;
+    },
+    link() {
+      return pageLinks[this.name][this.row];
+    },
+    title() {
+      return selectionData[this.name][this.row].title;
     }
   },
   mounted() {
+    if (!this.row) {
+      // TODO 未找到当前分类
+      console.log("....");
+    }
     this.getSortData();
   },
   methods: {
@@ -55,8 +69,9 @@ export default {
     }),
     async getSortData(start = 0, count = 20) {
       this.$loading.show();
+
       const result = await this.$ajax({
-        url: pageLinks[this.name][this.sort],
+        url: this.link,
         params: {
           start,
           count

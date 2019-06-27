@@ -1,5 +1,6 @@
 export const isFunction = prop => typeof prop === "function" && typeof prop.nodeType !== "number";
 
+export const isString = prop => typeof prop === 'string'
 
 export const isWindow = prop => prop !== null && prop === prop.window
 

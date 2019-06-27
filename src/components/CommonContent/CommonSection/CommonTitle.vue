@@ -5,26 +5,33 @@
   </div>
 </template>
 <script>
-import { pageNames } from "../../utils/pageHelper";
+import { pageNames, selectionData } from "../../../utils/pageHelper";
 
 export default {
   props: {
-    title: {
+    row: {
       type: String,
       required: true
     },
-    link: {
-      type: [String, Object],
+    name: {
+      type: String,
       required: true
+    }
+  },
+  computed: {
+    title() {
+      return selectionData[this.name][this.row].title;
+    },
+    sort() {
+      return selectionData[this.name][this.row].sort;
     }
   },
   methods: {
     loadMore() {
-      console.log(this.link, "xxxx");
       this.$router.push({
-        name: pageNames[this.link.name].MORE,
+        name: pageNames[this.name].MORE,
         params: {
-          sort: this.link.sort
+          sort: this.sort
         }
       });
     }

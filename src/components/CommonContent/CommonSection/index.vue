@@ -1,6 +1,6 @@
 <template>
   <div class="common-section">
-    <CommonTitle :title="title" :link="link"/>
+    <CommonTitle :row="row" :name="name"/>
     <CommonList :commonList="commonList" :name="name"/>
   </div>
 </template>
@@ -9,17 +9,13 @@ import CommonList from "./CommonList";
 import CommonTitle from "./CommonTitle";
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
-    link: {
-      type: [String, Object],
-      required: true
-    },
     commonList: {
       type: Array,
       default: () => []
+    },
+    row: {
+      type: String,
+      required: true
     },
     name: {
       type: String,

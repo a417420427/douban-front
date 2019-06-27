@@ -24,7 +24,8 @@
   </div>
 </template>
 <script>
-import { getBackground } from "../../utils/files";
+import { getBackground } from "../../../utils/files";
+import { pageNames } from "../../../utils/pageHelper";
 
 export default {
   props: {
@@ -40,9 +41,8 @@ export default {
   methods: {
     getBackground,
     itemClick(id) {
-      console.log(id, this.name);
       this.$router.push({
-        name: this.name,
+        name: pageNames[this.name].DETAIL,
         params: {
           id
         }

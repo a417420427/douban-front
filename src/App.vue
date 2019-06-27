@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    document.querySelector(".page-header").classList.add("op-0");
+    //document.querySelector(".page-header").classList.add("op-0");
     // document.querySelector(".page-home-banner").classList.add("op-0");
   }
 };
