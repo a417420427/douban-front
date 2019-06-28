@@ -5,6 +5,7 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 import Loading from './components/Loading'
+import Message from './components/Message';
 import './components/base'
 import './styles/index.scss'
 import './assets/fonts/iconfont'
@@ -15,6 +16,7 @@ const instance = axios.create({
 })
 
 Vue.use(Loading)
+Vue.use(Message)
 Vue.prototype.$ajax = instance
 
 

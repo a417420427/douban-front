@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <AppHeader @click="troggleSearch"/>
+    <!-- <AppHeader @click="troggleSearch"/>
     <Search v-if="searchVisiable" @click="troggleSearch"/>
     <router-view class="page-container"/>
+    </div>-->
+    <Message/>
   </div>
 </template>
 
 <script>
 import AppHeader from "./components/AppHeader";
 import Search from "./components/Search";
+import Message from "./components/Message/Message";
 export default {
   name: "App",
   data() {
@@ -19,7 +22,8 @@ export default {
   },
   components: {
     AppHeader,
-    Search
+    Search,
+    Message
   },
   methods: {
     troggleSearch(value) {
