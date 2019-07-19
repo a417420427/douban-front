@@ -1,18 +1,18 @@
 <template>
-  <div class="page-home" @scroll="pageScroll">
-    <div class="page-home-main">
+  <div class="page-home" ref="pageHome">
+    <div class="page-home-main" @scroll="e => console.log(e, 'xss')">
       <ul class="page-home-banner dp-f">
         <li>
-          <a href="/movie" class="hot">影院热映</a>
+          <router-link to="/movie/more/showing" class="hot">影院热映</router-link>
         </li>
         <li>
-          <a href="/user" class="user">我的</a>
+          <router-link to="/user" class="user">我的</router-link>
         </li>
         <li>
-          <a href="/time" class="time">豆瓣时间</a>
+          <router-link to="/time" class="time">豆瓣时间</router-link>
         </li>
         <li>
-          <a href="/app" class="app">试用豆瓣APP</a>
+          <router-link to="/app" class="app">试用豆瓣APP</router-link>
         </li>
       </ul>
       <ul class="recommend-list">
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       recommendList: [],
-      start: 0
+      start: 0,
+      isend: false
     };
   },
   components: {
@@ -47,25 +48,31 @@ export default {
   },
   methods: {
     getRecommend(start, count) {},
-    pageScroll: scrollHandler(() => {
-      this.getHomeList({
-        start: this.start,
-        count: BASE_COUNT
-      });
+    pageScroll: scrollHandler(function() {
+      this.getHomeList(this.start, BASE_COUNT);
     }),
-    async getHomeList(params = {}) {
+    async getHomeList(start = 0, count = 20) {
+      if (this.isend) return;
       this.$loading.show();
       const result = await this.$ajax({
         url: "/api/home/list",
-        params
+        params: {
+          start,
+          count
+        }
       });
+      this.$loading.hide();
       this.recommendList = [...this.recommendList, ...result.data.items];
       this.start += result.data.count;
-      this.$loading.hide();
+      this.isend = result.data.count > result.data.new_item_count;
     }
   },
   mounted() {
+    this.$refs.pageHome.addEventListener("scroll", this.pageScroll);
     this.getHomeList();
+  },
+  beforeDestroy() {
+    this.$refs.pageHome.removeEventListener("scroll", this.pageScroll);
   }
 };
 </script>
@@ -98,6 +105,9 @@ export default {
     .base-item {
       margin: 25px 20px;
       border-bottom: 1px solid #e3e3e3;
+      &:last-child {
+        border-bottom: 1px solid transparent;
+      }
     }
   }
 }

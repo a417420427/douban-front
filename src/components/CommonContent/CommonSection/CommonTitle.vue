@@ -45,7 +45,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   .more {
-    color: $mainColor;
+    color: $main;
     font-size: 16px;
   }
 }

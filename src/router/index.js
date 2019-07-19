@@ -14,6 +14,7 @@ import TvDetail from '../pages/TvDetail/index.vue'
 import Music from '../pages/Music/index.vue'
 import MusicMore from '../pages/MusicMore/index.vue'
 import MusicDetail from '../pages/MusicDetail/index.vue'
+import TimePage from '../pages/Time/index.vue'
 import { pageNames } from '../utils/pageHelper';
 
 Vue.use(Router)
@@ -88,6 +89,11 @@ export default new Router({
       path: '/music/more/:sort',
       component: MusicMore,
       name: pageNames.music.MORE
-    }
+    },
+    {
+      path: '/time',
+      component: TimePage,
+      name: pageNames.time.MAIN
+    },
   ]
 })

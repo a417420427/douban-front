@@ -1,7 +1,7 @@
 <template>
   <div class="page-header dp-f">
     <div class="pg-hd-left">
-      <div class="logo">
+      <div class="logo" @click="goHome">
         <img src="../assets/images/douban.png" alt>
       </div>
     </div>
@@ -20,7 +20,10 @@ export default {
     };
   },
   methods: {
-    showSearch() {}
+    showSearch() {},
+    goHome() {
+      this.$router.push("/");
+    }
   }
 };
 </script>

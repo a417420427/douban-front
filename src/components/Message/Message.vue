@@ -3,7 +3,7 @@
     <div
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
-      v-if="visiable"
+      v-if="visible"
       class="message-container"
       :style="positionStyle"
     >

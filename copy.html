@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Copy</title>
+</head>
+
+<body>
+    <style>
+        .caption-font,
+        .image-container .image-caption-wrapper,
+        .introduction,
+        blockquote {
+            font-size: 15px;
+            line-height: 23px;
+            color: #9b9b9b
+        }
+
+        .card-box,
+        .subject-wrapper {
+            display: block;
+            background: #fcfcfc;
+            overflow: hidden;
+            padding: 15px;
+            margin: 30px 0;
+            position: relative
+        }
+
+        .card-box:after,
+        .subject-wrapper:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            box-sizing: border-box;
+            width: 200%;
+            height: 200%;
+            -webkit-transform: scale(.5);
+            transform: scale(.5);
+            -webkit-transform-origin: left top;
+            transform-origin: left top;
+            pointer-events: none
+        }
+
+        .card-title-font,
+        .subject-wrapper .subject-info .subject-title {
+            font-size: 15px;
+            color: #494949;
+            line-height: normal
+        }
+
+        .card-meta-font,
+        .subject-wrapper .subject-info .subject-rating,
+        .subject-wrapper .subject-info .subject-summary {
+            font-size: 12px;
+            color: #9b9b9b;
+            line-height: normal
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center
+        }
+
+        .image-container .image-wrapper img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: auto
+        }
+
+        .image-container .image-caption-wrapper {
+            margin-top: 5px
+        }
+
+        h2 {
+            font-size: 21px;
+            font-weight: bold;
+            color: #494949;
+            margin: 40px 0 20px
+        }
+
+        #content>p {
+            margin: 25px 0
+        }
+
+        #content>p:empty+p:empty {
+            height: 1px
+        }
+
+        .introduction {
+            background: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 30px
+        }
+
+        blockquote {
+            position: relative;
+            margin: 18px 0;
+            padding: 0 0 0 24px;
+        }
+
+        blockquote:before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 22px;
+            top: -4px;
+            left: 0px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAsCAYAAAAJpsrIAAAABGdBTUEAALGPC/xhBQAAAk1JREFUWAntV71KA0EYTC6RGEGxEAmR/ByKvY1YKGhhIxYWgg8gCKLYWQiCQUF8Bh/AQitBwVIrm4C1KOYPU2itcCHJORtM2Fy+29vNHQiy12Qz++18c7Nze1wopHAVCoXRUql0Wq1WhxSWCUvdOA3hqt9J27YNCNoKh8MvzWbzoFarbcusE9V4cYZFi9kc3BmzLOsCw2Wu9iMWi5nJZPKbw6SHMpxCx2DzHNx5cohiAsaB70gr4QplOV0dKxaLS+C7geVuefqMx+NmIpH44voKhyqcpGO4q0UPUSHkjW0xEy91qXL2CCuXy5PodC1wiol6NAxjNpPJ3Mio6oezSxjExPDUXaHZCNUQgprAjyFoPp1O56kaJ9YvZ5QnwpFwAqIZHuPGFoStZ7NZKZfa6/rl7IS/UqlMNBqNVwgbbJNyvxbGa6Zp3nGY59APZ8cxbOGhi6gQ8rSH7VMSxVT74Ww5hsfYhKhncA0QNlzCqQ0CF0J+Odvh33URVcMJvy9U4D7pi7MlDG6tUvwI+zleO2Vqzgvzy2kgoFNoMu1sBFF2JBI5c+Iy/4PgNBDQFaoZ7jifSqXeqTkvLAhOAwIWqEZ4Em8pXAYLgpNljL2Cei4Iu+8B5QHfnEyYSfWDsDcKl8R8c7IDdphqVq/XN/E6sak5HmPOIosPPIaxb84o8hBxkLb+IsBHFE5gOWBdwoLgbJ1jRLM/h7Qw1S3QjmnHVB1QrdcZ046pOqBarzOmHVN1QLVeZ0w7puqAar3O2L9xLIrvwpzq3fD11Bd7EJw/Th49QWOYzfcAAAAASUVORK5CYII=) 50% no-repeat;
+            background-size: contain
+        }
+
+        .subject-wrapper .subject-cover {
+            float: left;
+            width: 50px;
+            max-height: 75px;
+            margin-right: 15px;
+            overflow: hidden
+        }
+
+        .subject-wrapper .subject-cover img {
+            display: block;
+            max-width: 100%
+        }
+
+        .subject-wrapper .subject-info {
+            overflow: hidden
+        }
+
+        .subject-wrapper .subject-info .subject-rating {
+            margin: 2px 0
+        }
+
+        .subject-wrapper .subject-info .subject-summary {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2
+        }
+
+        .separator {
+            margin: 30px 0
+        }
+
+        .separator hr {
+            width: 70px;
+            border: 1px solid #dfdfdf;
+            margin: auto
+        }
+
+        .rating-star0,
+        .rating-star1,
+        .rating-star2 {
+            display: inline-block;
+            margin-right: 1px;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 10px;
+            background-size: 10px 10px
+        }
+
+        .rating-star1 {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAfhJREFUOBGlVD1LHFEUPXfWrzGJO2uhaIQ0iljESgKSpAjBwpXVKikEl6TzD6TwJ4gWaQMBS8WQgCRZ61QpglUgRbQUbMR1XfwodvbmvE1mdt/ssDPBC493733nnrkf7w2QQrSU29D9wY8poJAkkG6hD8O5E+IGgJsHkr8+7hTjdDpsnA0PLkHE4yK2r5iETyYUfdUkkRa96W3VOhLqXv8oFHNhgGCC/Xwc2jFKR0J0966w1IwVp/LasiNGOBTdxV24bhbqenCQRUY9qLzl2CasGEUVdbyA1M5R1wrq/gUqVxUp4tLghCX85D7VlonFksJQ9Un3w5S8c2sy8z3TGtGDRsla8op0vKe3O0UuMRBVDm9N8uX1Zg/3s8+hmU/sGS/wf8kN0UWZP/tgokJCY+jX3ENmWqJ3zNiJonoKXxalcPY9wFqExqmf3fvIuL+SM2WZNX9SCheHAZnZ2++h9FyxufdaQfG6CBznTvQshtDhSyA4jQieRmExhO2gaFBoi5OK8EkYECiqX9jdd1wauP7tbVgrw8a/TzETBpkp1nWZ96sg8+VV8j0j6VF4Dozo3sB4ix0ZypD3iO3r+QvQbfi1KVkobwcBkj//hmp5msSbXHxqlC67bCtDDr2fN/43wYvMaFkK1dOALNjlJa6Z8RuIP0vfAZfVhj/iqoy46fpKwgAAAABJRU5ErkJggg==")
+        }
+
+        .rating-star2 {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAe9JREFUOBGllDtIA0EQhmdvTxBfUbERElBQsDLWPlFsfIGNWAg+Ki3SCha2FoK92NoIPrCwsBYECx+VldjkgSCoZxRR8e7W/zZ3yW0uJlEXwu7O/PNlZmcSojKWOG48SKVSB2VISSslEof1LSTEOGNsEtBwKX1JIFXSHDH5xY529l9AQUARm/NB5n3ngsfiGR7VDwDY6kWi7PZ4PN7j3QvtxYGcLeQH6boesPk1KCmzxDZVU6gqRFwLEdPqiPQGvNw+vNVEwrzrvNZd6atlWVPI9tk0zTTn/MUwjHQ0Gn1z/AwjcYEudhFj3A0osCnAAn5psoQQ5xpgl8VhP8UH7BzAS42NGouArqIsNPXPS9i2vRKJRGKyKYCukU0zYH7+FomsPvCZBmzdic12mY0ZO5i6YWT6+AvoA7RD4XB4z4vJAh0DGzFOyfrq85wldqfMbsDO/DoFKB1cq/ELipwxOQwjpa4g0NbLzRBPLgLaIJAFRWoOuRsyLANI1JsLcU5ynLaQzZZzUX35Wl+XZehRbQeGvCkbJOgG5340K4bHX0ITBgG+9fzIsDmZTLZ5d2dXS+YVbgnCRGLrdP8UlZ13IzBrJwB2ArwBkyUBmqaU7f3gMyFClnROlr3EJtJXLkfZAH2HYTmRSOzij2ETX6A8wzc5maj6k+W68AAAAABJRU5ErkJggg==")
+        }
+
+        .rating-star0 {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeRJREFUOBGtlDsvBFEUx3d2djfiMbTsQ0NEwTaiQSGiRKWREDofgMJHEAqdSPSE0BC9SiEqWQWSzT4SzSbrsR7Fzo7fEXfNg9klbjI5j/s/vzn3MRMI1DFyudxaPp8/qEMa0GqJ0ul0QzgcvtM0zbAsqzMWi+X9aoJ+kzIXiUSmgLXhinZOcn6jJpDieRvA7tvSX64vMJvNdiAdV3I67c5kMkMq/s76AgHMUqTbC0Oh0II9dvvVQ0mlUs2GYbRWKpU2ij4swA3pylX0ZJrmNPn7crn8oOv6Y7FYfEgmk8+i07gOl0z24js6cUHqCU1uwbksefcfYPJCHeDFx5LpUq7DNp2GZeYPw2KrVuLx+Gp1D4GOATwEZvwGSFdv6Oe48PtSVwVKwCfWB/SEJyZxHaMAcBLYmdI6gJIEGg0Gg1e4tTqVZfawzBsFE+u5h4heyLfYRT/4LERrcs95gNwr+RI8nbsLJWa5I+68B8hbPSJ3kYq/03qAvHVYFShL7phni9hSuU/r0TqA8u9DOGArKvCZzXCKEzyL7O8o4Fs1T4ftHGKXisU6gOzfIKLIp2CnVCr1JhKJHVXAiZ4C7Ae8Ts6UPDfCsUUhJRYLrJGCa+xSNBo9ss8pH+gr/jK/tj0a2ETv2IZ35FSkS7HbzakAAAAASUVORK5CYII=")
+        }
+
+        .rating-score {
+            margin-left: 4px
+        }
+    </style>
+    <div id='content'>
+        <div class="introduction">
+            <p>一个月时间，给房子整容式改造，瘦了四斤，端午节后从外地旅拍回到家里，那种归属感让我觉得一切辛苦都值得。现在每天都沉寂在自己家怎么这么好看的喜悦当中～～</p>
+        </div>
+        <p>改造出租房，是我一直喜欢的事情。当年在深圳，有一年我大概搬了四次家，每次我都花了很多心思去改造，觉得自己住的地方，花一点点钱装修一下，每天回到家的心情都会不一样。但是这一次我是真的花了心思，也觉得应该用心记录一下。因为自己是摄影师，在没来杭州之前就想着能租个房子自己能住，也可以给客人拍拍照。
+        </p>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62438061" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">成品图</div>
+            </div>
+        </div>
+        <p></p>
+        <p>房子的在杭州下城区很中心的位置，建国北路地铁口，离西湖很近，可以说是近一切的位置。租这一片是因为在豆瓣上看到一篇文章，大意是写的是当年在下城区租房的时候的快乐生活，这片老居民区有很多宝藏小店值得去挖掘，也非常有生活气息，后来买了自己的房子搬到了萧山去了，偶尔还是会想起在这里的日子。我的想法也是，以后自己买房子，肯定买不起这里的房子，如果能在这里住上几年，也是一件开心的事。租期是三年，中介承诺三年不涨租。
+        </p>
+        <p>中介带去第一次去看房，我拍下的照片..大家随意感受一下</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418065" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">厨房</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418138" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">卫生间</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418231" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">小次卧</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418243" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">大主卧</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418068" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">进门厨房处</div>
+            </div>
+        </div>
+        <p>厕所和厨房根本是到了不能住人的程度，但是中介说房东不介意你怎么改造，只要不要承重墙打掉都可以，我说我回去考虑一下，在回去的路上给我爸妈，发了小视频，因为之前给他们打了预防针，说自己想租个老房子改造，但是看到以后我爸还是觉得太破了，持反对意见，我大概回到家就开始做方案，发给了我爸爸妈妈，没办法，自己女儿要做的事情，他把手里的工作放下了，过来帮了我两周。拿出来一面墙为例，这个是我的初步方案。
+        </p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418073" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">初步方案</div>
+            </div>
+        </div>
+        <p>后来因为楼层太高了，如果把厕所和厨房的瓷砖打掉的话，大概需要话2万块钱，这个不是关键，关键是就算请工人，也太辛苦了，一百多大袋建筑垃圾要弄下去，所以不得不放弃，改贴墙纸。</p>
+        <p><span style="font-weight: bold;">把方案定下来，就开工啦～～～</span></p>
+        <p><span
+                style="font-weight: bold;">先表扬一下，任劳任怨的爸爸，以前我做什么事，他们都不支持，比如我在大学开咖啡馆，他们当时肺都气炸了，这么多年来，我们沟通越来越多，他们也越来越支持我，这次是因为有了他们的支持，我才能做好这件事。</span>
+        </p>
+        <p><span style="font-weight: bold;">第一步：买油漆</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418072" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">谢谢爸爸，油漆特别重要搬到七楼</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418075" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">将洗脸盆拆掉重新换了一个洗脸组合柜</div>
+            </div>
+        </div>
+        <p><span style="font-weight: bold;">第二步：撕纸</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418074" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">别看是个简单的活，这个纸撕了我两天。。。不知道之前的租客是怎么想的。。。。</div>
+            </div>
+        </div>
+        <p><span style="font-weight: bold;">第三步：把旧房子清空</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418855" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">捋起袖子干</div>
+            </div>
+        </div>
+        <p>第四步：请的水电师傅，改水电。把所有线都走整齐了。</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418077" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">我爸爸自己刷的墙，厉害吧</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62423254" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">给门上油漆，走完线刷完墙以后厨房显得干净多了</div>
+            </div>
+        </div>
+        <p> 我把客厅刷成绿色了，因为如果要偶尔用来拍人像的话，场景越多越好，如果是单纯的住家是没有必要的。刷绿以后，因为我爸爸，他执意想自己刷，我提出来不要刷顶，因为空间小，刷顶太压抑了，但是被他否决了。这也是我在装修过程中很后悔没有坚持的，不过后来想了一些弥补措施，效果也还不错。
+        </p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418088" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">万能的爸爸</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418089" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">刷完以后非常开心，让爸爸给我拍了一张照片，特别爱绿色，哈哈哈。</div>
+            </div>
+        </div>
+        <p>第五步：水电，刷墙和贴墙纸搞定以后，就开始买买买啦～～</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418091" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">吃外卖的时候随手拍的，有点点初步的感觉了</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418092" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">给大家推荐一下这个，除黄剂，旧房改造神器，我在京东买的，就空调弄完以后跟新的一样</div>
+            </div>
+        </div>
+        <p>在闲鱼上选中了一大堆家具，包了一个货拉拉司机的车一天，杭州各个区跑去拉东西。</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418094" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">高速路上随手拍，每天都比前一天更爱杭州一点点</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418093" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">可爱的爸爸 抓拍我的，我爸真的越来越上道了</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62418096" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">差不多基本完成最后搞卫生啦～～每天跟一个民工一样真的好辛苦</div>
+            </div>
+        </div>
+        <p>现在放一点前后对比图</p>
+        <p>大主卧，阳台，这是个两室朝南的房子，非常通风，非常舒服。</p>
+        <p><span style="font-weight: bold;"> 前</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419173" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419191" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419197" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p><span style="font-weight: bold;"> 后</span></p>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419378" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">图中的两盏灯都特别喜欢，也花了很多心思去挑</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62443602" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">朋友送了我大白兔奶糖的香氛，每天家里都充满大白兔奶糖的味道甜甜的</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419738" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">后</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419762" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">瓶子里是泡泡🍬嘻嘻</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62419780" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">特别喜欢这个吊床，在阳台上坐着抽抽烟看看书很舒服</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62420034" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">在闲鱼买了一个二手沙发床，本来打算放在客厅，放不下，放在主卧正好）</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62420992" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">越看越喜欢的灯，家里的每个细节我真的都很用心在布置</div>
+            </div>
+        </div>
+        <p>小次卧，是我自己的小窝，睡觉修图的地方</p>
+        <p><span style="font-weight: bold;"> 前</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421211" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">感受一下</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421227" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">小哥是带我看房的中介</div>
+            </div>
+        </div>
+        <p>后</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421269" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">后</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421273" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">认真工作认真p图的我</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421295" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">油画，是之前开咖啡馆，美院的老师给我画的，图片里面是我和我的咖啡馆</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421345" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">为这个化妆品收纳盒打爆call，像我这种身体乳都要屯三瓶...这个化妆盒容量太感人了</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421389" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">我房间的每一个灯我都特别喜欢</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421445" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">衣架也特别喜欢</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421682" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">刚发现这个角度没有，用手机随手拍了一张</div>
+            </div>
+        </div>
+        <p></p>
+        <p>客厅</p>
+        <p>前</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421832" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">不知道那个冰箱旁边开个口子通到厨房，是什么魔鬼的设计</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421848" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p><span style="font-weight: bold;">后</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421897" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">全景 那幅画还没来得及挂在墙上 因为要打洞</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421928" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">喜欢这个沙发</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421944" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">音响真的是让人幸福指数上升的小物件</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62421980" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">每天都好开心</div>
+            </div>
+        </div>
+        <p><span style="font-weight: bold;">厨房，大家还记得这张魔鬼的图片吗？</span></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422129" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422234" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422193" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">把墙门刷白，所有线走到里面，装了抽油烟机，因为自己每天都要喝咖啡还买了胶囊咖啡机</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422246" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">装了一个组合柜，洗菜刷牙洗脸洗衣服一体，方便又好用，盆里泡里毛豆准备做凉拌毛豆</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422270" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">厨房一角</div>
+            </div>
+        </div>
+        <p>厕所</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422332" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">前</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422376" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">把厕所门换成了折叠门，也贴了墙纸，节约了空间，淘宝买的，便宜到我爸爸都不敢相信</div>
+            </div>
+        </div>
+        <p>最后文末放几张生活照</p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422602" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">修图修到凌晨1点的随手拍</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422614" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">好久没自己做饭了</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422622" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">最近一直在练习用手打奶泡拉花</div>
+            </div>
+        </div>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62422639" width="" /></div>
+            <div class="image-caption-wrapper">
+                <div class="image-caption">失败</div>
+            </div>
+        </div>
+        <p>改造的总共花费，包括软装和所有家具家电，在三万左右。如果大家看中了什么，可以在评论下方找我要链接，如果是在淘宝店买的我一定会贴出来的～～</p>
+        <p>我是喜欢拍照的，女摄影师小小，常驻杭州，上海南京不定期旅拍～</p>
+        <p>也欢迎大家来我家找我拍照呀～约拍，其他合作请私信，我都会看。</p>
+        <p>如果大家喜欢的话，可以转发+点赞这篇文章，7月31号，看心情抽出来一位送我从澳洲背回来的香薰蜡烛一块，墨绿色的特别好看，另外看心情抽出十位送《少年的你》电影票（来自一个粉丝的倔强）一定要上映啊！！！！</p>
+        <p>版权归作者所有，任何形式转载请联系作者。</p>
+        <p>微信公众号/微博：x小小不小x</p>
+        <p></p>
+        <div class="image-container image-float-center">
+            <div class="image-wrapper"><img id="img_62438530" width="" /></div>
+        </div>
+        <p></p>
+    </div>
+</body>
+
+</html>

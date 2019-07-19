@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <!-- <AppHeader @click="troggleSearch"/>
+    <AppHeader @click="troggleSearch"/>
     <Search v-if="searchVisiable" @click="troggleSearch"/>
     <router-view class="page-container"/>
-    </div>-->
-    <Message/>
   </div>
 </template>
 
@@ -47,5 +45,6 @@ export default {
 .page-container {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 }
 </style>

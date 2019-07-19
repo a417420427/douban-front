@@ -28,6 +28,9 @@ export const pageLinks = {
         thirdRow: '/api/music/japan',
         types: '/api/music/types',
         detail: '/api/music/detail'
+    },
+    time: {
+        modules: '/api/time/modules',
     }
 }
 
@@ -118,6 +121,11 @@ export const pageNames = {
     },
     music: {
         MAIN: 'music',
+        DETAIL: 'musicDetail',
+        MORE: 'musicMore'
+    },
+    time: {
+        MAIN: 'timePage',
         DETAIL: 'musicDetail',
         MORE: 'musicMore'
     },

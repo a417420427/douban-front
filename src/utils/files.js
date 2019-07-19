@@ -1,5 +1,5 @@
 
-import debounce from "lodash.debounce";
+import throttle from "lodash.throttle";
 
 export const getTransferedImage = src => {
     const prefix = `${baseURL}/api/assets/images`;
@@ -11,15 +11,16 @@ export const getBackground = src => {
 }
 
 
-export const scrollHandler = (
+export const scrollHandler = function (
     fn,
     time = 500,
     distance = 100
-) => debounce(function (e) {
-    const target = e.target
-    if (target.scrollHeight - target.scrollTop - target.clientHeight < distance && !this.$loading.isLoaded) {
-        // fn.apply(this)
-        fn()
-    }
+) {
+    return throttle(function (e) {
+        const target = e.target
+        if (target.scrollHeight - target.scrollTop - target.clientHeight < distance) {
+            fn.apply(this)
+        }
 
-}, time)
+    }, time)
+}
